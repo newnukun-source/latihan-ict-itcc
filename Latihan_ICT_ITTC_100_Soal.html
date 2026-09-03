@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Latihan ICT ITTC — 100 Soal</title>
+<style>
+:root{--bg:#0b1020;--card:#121a2d;--card2:#18233b;--text:#eef3ff;--muted:#9eacc8;--accent:#6ea8fe;--ok:#37d67a;--bad:#ff6978}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,Arial,sans-serif;background:radial-gradient(circle at top,#152344 0,#0b1020 45%);color:var(--text);min-height:100vh}
+.wrap{max-width:900px;margin:auto;padding:24px}.top{display:flex;justify-content:space-between;gap:16px;align-items:center;margin-bottom:18px}.brand h1{margin:0;font-size:26px}.brand p{margin:6px 0;color:var(--muted)}
+button{border:0;border-radius:12px;padding:12px 16px;font-weight:700;cursor:pointer}.ghost{background:#202d48;color:#dfe8ff}.primary{background:var(--accent);color:#06101f}.danger{background:#4a2029;color:#ffdfe3}
+.card{background:rgba(18,26,45,.94);border:1px solid #263556;border-radius:20px;padding:22px;box-shadow:0 14px 40px rgba(0,0,0,.24)}
+.progress{height:10px;background:#24314b;border-radius:99px;overflow:hidden}.bar{height:100%;width:0;background:linear-gradient(90deg,#6ea8fe,#7ef0c3);transition:.25s}
+.meta{display:flex;justify-content:space-between;color:var(--muted);font-size:14px;margin:10px 0 20px}.q{font-size:21px;line-height:1.45;margin:8px 0 22px}.opt{display:block;width:100%;text-align:left;background:var(--card2);color:var(--text);border:1px solid #2a3a5e;margin:10px 0;padding:14px 16px;border-radius:14px;font-size:15px;transition:.15s}.opt:hover{border-color:var(--accent);transform:translateY(-1px)}.opt.selected{border-color:var(--accent);background:#223a64}.nav{display:flex;justify-content:space-between;gap:10px;margin-top:20px}
+.result{text-align:center}.score{font-size:58px;font-weight:900;margin:15px 0}.sub{color:var(--muted)}.review{margin-top:20px;text-align:left}.rev{padding:15px;border-radius:14px;margin:9px 0;background:#111a2c;border:1px solid #263556}.ok{border-left:4px solid var(--ok)}.bad{border-left:4px solid var(--bad)}.small{font-size:13px;color:var(--muted)}
+.hidden{display:none}.pill{background:#202d48;color:#c8d6f7;padding:8px 10px;border-radius:999px;font-size:13px}
+@media(max-width:640px){.wrap{padding:14px}.top{align-items:flex-start}.q{font-size:18px}.score{font-size:46px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <div class="brand">
+      <h1>🧠 Latihan ICT ITTC</h1>
+      <p>100 soal • A–E • opsi jawaban diacak otomatis</p>
+    </div>
+    <div><button class="ghost" id="restart">↻ Acak Ulang</button></div>
+  </div>
+  <div id="quiz" class="card">
+    <div class="progress"><div id="bar" class="bar"></div></div>
+    <div class="meta"><span id="num"></span><span class="pill" id="scoreLive">Skor: 0</span></div>
+    <div class="q" id="question"></div>
+    <div id="options"></div>
+    <div class="nav">
+      <button class="ghost" id="prev">← Sebelumnya</button>
+      <button class="primary" id="next">Berikutnya →</button>
+    </div>
+  </div>
+  <div id="result" class="card result hidden"></div>
+</div>
+<script>
+const BANK = [["Urutan proses kerja komputer yang paling sesuai dengan modul ketika data dimasukkan, disimpan, diolah, lalu ditampilkan adalah ...", ["Input → Storage → Process → Output", "Output → Input → Storage → Process", "Input → Process → Storage → Output", "Storage → Input → Output → Process", "Process → Input → Storage → Output"], 0], ["Perangkat yang dapat dilihat dan disentuh secara fisik dan digunakan sebagai media menjalankan program termasuk ...", ["Brainware", "Software", "Sistem operasi", "Hardware", "Program aplikasi"], 3], ["Klasifikasi keyboard, prosesor, dan monitor secara berurutan adalah ...", ["Input device – process device – output device", "Process device – input device – output device", "Input device – output device – process device", "Output device – process device – input device", "Input device – process device – storage device"], 0], ["Microsoft Word dikategorikan sebagai program aplikasi karena ...", ["hanya digunakan untuk angka", "merupakan perangkat keras", "berjalan di atas sistem operasi", "mengendalikan seluruh hardware", "digunakan untuk booting"], 2], ["Proses ketika komputer memeriksa kebutuhan hardware sebelum memulai sistem operasi disebut ...", ["Login", "Shutdown", "Desktop", "Booting", "Rendering"], 3], ["Setelah booting, pengguna memilih profil dan memasukkan password. Aktivitas ini disebut ...", ["Formatting", "Login", "Booting", "Shutdown", "Recovery"], 1], ["Pasangan fungsi perangkat yang tepat adalah ...", ["Mouse — mencetak dokumen", "Monitor — memasukkan perintah ketik", "Speaker — menampilkan sinyal suara", "Keyboard — menyimpan sistem operasi", "Processor — menampilkan gambar"], 2], ["Komputer memiliki hardware dan software tetapi tidak ada orang yang mengoperasikannya. Komponen yang tidak tersedia adalah ...", ["Storage", "Brainware", "Output device", "Processor", "Operating system"], 1], ["Alternatif konektor monitor yang disebut modul selain VGA adalah ...", ["USB dan PS/2", "HDMI dan DVI", "RJ45 dan USB", "PS/2 dan SATA", "Audio dan Ethernet"], 1], ["Menurut modul, konektor PS/2 untuk mouse/keyboard dihubungkan ke port berwarna ...", ["Merah muda", "Biru", "Hijau", "Hitam", "Putih"], 2], ["Port audio berwarna hijau pada casing digunakan untuk ...", ["Mikrofon", "Speaker", "Line in", "Printer", "Monitor"], 1], ["Jika arus listrik tidak stabil, perangkat yang disarankan modul untuk membantu menstabilkan arus adalah ...", ["Scanner", "HDMI splitter", "Speaker", "Stavol", "Mouse wireless"], 3], ["Fungsi UPS yang disebutkan modul adalah ...", ["Mengubah file Word menjadi PDF", "Menyediakan sumber daya listrik sementara saat listrik utama padam", "Mempercepat internet", "Menambah RAM", "Mengubah sinyal digital menjadi analog"], 1], ["Urutan instalasi yang tepat agar aplikasi dapat digunakan pada komputer baru adalah ...", ["Install aplikasi → install sistem operasi", "Install sistem operasi → install program aplikasi", "Install browser → install hardware", "Install driver → install keyboard", "Install aplikasi → login → install sistem operasi"], 1], ["Manakah contoh sistem operasi yang disebutkan dalam modul?", ["Microsoft Excel", "Google Chrome", "Linux", "Microsoft Word", "Download Manager"], 2], ["Shortcut Icon pada desktop terutama berfungsi sebagai ...", ["Penghapus aplikasi", "Jalan pintas menjalankan program tertentu", "Tempat file terhapus", "Pengatur ukuran monitor", "Pengganti processor"], 1], ["Pengaturan wallpaper, tema warna, taskbar, Start Menu, dan Lock Screen dilakukan melalui ...", ["Display", "Personalize", "Apps", "Device Manager", "Properties"], 1], ["Manakah yang bukan termasuk pengaturan Display yang dijelaskan modul?", ["Brightness", "Resolusi layar", "Orientasi layar", "Multiple display", "Mengubah nama file"], 4], ["Dalam analogi modul, jika drive adalah lemari dan folder adalah map, maka file dapat dianggap sebagai ...", ["Rumah tempat penyimpanan", "Isi/data yang disimpan", "Sistem operasi", "Port hardware", "Proses booting"], 1], ["File yang masih berada di Recycle Bin dapat dikembalikan menggunakan perintah ...", ["Rename", "Format", "Restore", "Cut", "Properties"], 2], ["Internet paling tepat didefinisikan sebagai ...", ["Kumpulan aplikasi Microsoft yang saling terhubung", "Jaringan komputer yang saling terhubung secara global untuk berinteraksi dan berbagi data", "Media penyimpanan lokal", "Program pembuka PDF", "Jaringan khusus teks"], 1], ["Komponen yang menyediakan layanan akses internet dari sisi penyedia jasa adalah ...", ["ISP", "Printer", "Monitor", "Keyboard", "Scanner"], 0], ["Menurut modul, fungsi modem berkaitan dengan ...", ["Mencetak data", "Mengubah sinyal analog menjadi digital dan sebaliknya", "Menyimpan file permanen", "Mengelola folder", "Mengedit teks"], 1], ["Yang termasuk software untuk mengakses internet adalah ...", ["Mozilla Firefox", "Motherboard", "Scanner", "Flashdisk", "Keyboard"], 0], ["Pada alamat www.uin-suka.ac.id, bagian ac.id menunjukkan ...", ["Nama pengguna", "Nama browser", "Domain akademik/perguruan tinggi di Indonesia", "Lokasi file", "Jenis wireless"], 2], ["Pasangan domain yang tidak sesuai dengan modul adalah ...", ["ac.id — akademik/perguruan tinggi", "co.id — organisasi komersil", "go.id — instansi pemerintahan", "web.id — umum atau pribadi", "ac.id — organisasi komersil"], 4], ["Untuk mencari hasil yang mengandung salah satu dari dua kata, operator yang disarankan adalah ...", ["AND", "NOT", "OR", "ONLY", "WITH"], 2], ["Untuk mencari gabungan kata secara spesifik di Google, teknik yang disebutkan modul adalah ...", ["Menggunakan tanda kutip", "Menambahkan tanda %", "Menambahkan &", "Menggunakan /", "Menulis semua huruf kapital"], 0], ["Agar kata tertentu dibuang dari hasil pencarian, teknik yang tepat adalah ...", ["\"universitas digital\" game", "universitas digital +game", "\"universitas digital\" -game", "\"universitas digital\" OR game", "universitas digital /game"], 2], ["Untuk mencari hasil berupa jenis file tertentu, operator yang disebutkan modul adalah ...", ["site", "filetype", "etymology", "map", "weather"], 1], ["Untuk membatasi pencarian hanya dari situs tertentu digunakan operator ...", ["site", "filetype", "OR", "etymology", "map"], 0], ["Fungsi utama search engine adalah ...", ["Menjalankan sistem operasi", "Menghubungkan keyboard-monitor", "Mencari data/informasi di internet berdasarkan kata kunci", "Menyimpan dokumen ke harddisk", "Mengedit presentasi"], 2], ["Kode verifikasi SMS yang disebutkan pada pembuatan Gmail berjumlah ...", ["4 digit", "5 digit", "6 digit", "8 digit", "10 digit"], 2], ["Alamat email yang menjadi tembusan dan terlihat oleh penerima utama menggunakan ...", ["Bcc", "Cc", "Subject", "Draft", "Label"], 1], ["Fungsi Bcc adalah ...", ["Menentukan judul", "Mengirim ke penerima lain dengan alamat disembunyikan dari penerima lain", "Menyimpan email", "Mengubah tema", "Menambah file Drive"], 1], ["Ukuran maksimum lampiran file yang disebutkan modul Gmail adalah ...", ["10 MB", "15 MB", "20 MB", "25 MB", "50 MB"], 3], ["Email yang sudah terkirim dapat dilihat pada label ...", ["Draft", "Spam", "Terkirim", "Sampah", "Arsip"], 2], ["Untuk mengelompokkan email berdasarkan kategori seperti Kuliah dan Organisasi, fitur yang tepat adalah ...", ["Theme", "Label", "Bcc", "Subject", "Preview"], 1], ["Google Drive pada modul dijelaskan sebagai ...", ["Sistem operasi cloud", "Media penyimpanan dan manajemen file secara online", "Mesin pencari", "Program pengolah kata offline", "Antivirus"], 1], ["Kapasitas gratis Google Drive yang disebutkan modul adalah ...", ["5 GB", "10 GB", "15 GB", "20 GB", "25 GB"], 2], ["Nama default dokumen Word yang belum disimpan dapat tampil sebagai ...", ["Untitled.xls", "Document1", "Sheet1", "Slide1", "File0"], 1], ["Kata kunci Run untuk membuka Microsoft Word adalah ...", ["winexcel", "msword", "wordapp", "winword", "officeword"], 3], ["Quick Access Toolbar Word secara default menyediakan ...", ["Save, Undo, dan Repeat", "Print, Chart, dan Equation", "Cut, Copy, dan Font", "Bold, Italic, Underline", "Open, Close, Exit"], 0], ["Komponen Word yang menampilkan jumlah halaman, kata, dan bahasa/proofing adalah ...", ["Ribbon", "Status Bar", "Title Bar", "Ruler", "Document View"], 1], ["Shortcut untuk menyeleksi seluruh teks adalah ...", ["Ctrl + S", "Ctrl + A", "Ctrl + X", "Ctrl + O", "Ctrl + N"], 1], ["Teknik klik cepat untuk menyeleksi satu kata adalah ...", ["Klik satu kali", "Klik dua kali", "Klik tiga kali", "Alt + klik", "Klik kanan dua kali"], 1], ["Teknik klik cepat yang disebut modul untuk menyeleksi satu paragraf adalah ...", ["Klik satu kali", "Klik dua kali pada kata", "Klik tiga kali", "Shift + Enter", "Ctrl + klik"], 2], ["Shortcut untuk membuat teks tebal adalah ...", ["Ctrl + I", "Ctrl + U", "Ctrl + B", "Ctrl + T", "Ctrl + D"], 2], ["Untuk memindahkan teks, kombinasi yang tepat adalah ...", ["Ctrl + C lalu Ctrl + V", "Ctrl + X lalu Ctrl + V", "Ctrl + B lalu Ctrl + V", "Ctrl + A lalu Ctrl + X", "Ctrl + S lalu Ctrl + X"], 1], ["Perbedaan Delete dan Backspace yang dijelaskan modul adalah ...", ["Delete dari kiri, Backspace dari kanan", "Delete dari kanan, Backspace dari kiri", "Keduanya hanya satu kata", "Backspace untuk gambar saja", "Delete hanya untuk tabel"], 1], ["Perataan teks agar rata kiri sekaligus rata kanan adalah ...", ["Align Left", "Center", "Align Right", "Justify", "Distributed"], 3], ["Indentasi untuk menjorokkan hanya baris pertama paragraf adalah ...", ["Hanging Indent", "Left Indent", "Right Indent", "First Line Indent", "Center Indent"], 3], ["Indentasi yang mengatur baris kedua dan seterusnya pada paragraf adalah ...", ["First Line Indent", "Hanging Indent", "Right Indent", "Left Indent", "Decimal Tab"], 1], ["Jenis tab yang membuat teks rata di sebelah kanan tab stop adalah ...", ["Left Tab", "Center Tab", "Right Tab", "Bar Tab", "First Line Tab"], 2], ["Jenis tabulasi yang digunakan untuk format desimal adalah ...", ["Decimal Tab", "Right Tab", "Bar Tab", "Left Tab", "Center Tab"], 0], ["Dalam dialog Tabs, pengaturan yang menentukan jarak/posisi tab stop adalah ...", ["Leader", "Alignment", "Tab stop position", "Indentation", "Spacing"], 2], ["Fasilitas Word untuk memasukkan rumus matematika secara terstruktur adalah ...", ["Symbol", "Equation", "WordArt", "SmartArt", "Chart"], 1], ["More Symbols digunakan untuk ...", ["Membuka semua font", "Menampilkan lebih banyak pilihan simbol", "Membuat grafik", "Mengubah ukuran halaman", "Mengatur margin"], 1], ["Fitur untuk membuat daftar menggunakan simbol adalah ...", ["Numbering", "Multilevel List", "Bullets", "Equation", "Tabulation"], 2], ["Pada Numbering, fitur untuk menentukan nilai awal penomoran adalah ...", ["Change List Level", "Define New Number Format", "Set Numbering Value", "Start Tab", "Number Position"], 2], ["Struktur BAB I → A. Pendahuluan → B. Tujuan paling tepat dibuat dengan ...", ["Bullets", "Numbering", "Multilevel List", "Tab Stop", "WordArt"], 2], ["Perbedaan posisi header dan footer adalah ...", ["Header di bawah margin, footer di atas", "Header di atas margin, footer di bawah", "Header hanya teks, footer hanya gambar", "Header tidak bisa dicetak", "Footer hanya halaman pertama"], 1], ["Jalur menu untuk menambahkan nomor halaman adalah ...", ["Home → Number", "Insert → Page Number", "Layout → Numbering", "Review → Pages", "File → Page Number"], 1], ["Untuk membuat format nomor halaman berbeda antarbagiannya, langkah penting yang diperlukan adalah ...", ["Mengubah font tiap halaman", "Page Break biasa saja", "Section Break dan memutus Link to Previous", "Mengganti nama dokumen", "Menggunakan WordArt"], 2], ["Opsi untuk membuat tabel dengan memasukkan jumlah baris dan kolom melalui dialog adalah ...", ["Draw Table", "Convert Text to Table", "Insert Table", "Quick Table", "Excel Spreadsheet"], 2], ["Jika teks yang sudah ada ingin diubah menjadi tabel, fitur yang sesuai adalah ...", ["Convert Text to Table", "Draw Table", "Quick Table", "Excel Spreadsheet", "Insert Row"], 0], ["Menggabungkan beberapa sel menjadi satu menggunakan ...", ["Split Cells", "Merge Cells", "Convert Text", "Insert Cells", "Group Cells"], 1], ["Kebalikan dari Merge Cells adalah ...", ["Separate Table", "Split Cells", "Divide Table", "Unmerge Text", "Break Cells"], 1], ["Formula tabel Word dapat digunakan untuk operasi berikut, termasuk ...", ["Rata-rata", "VLOOKUP", "CONCATENATE", "HLOOKUP", "LOWER"], 0], ["Diagram alur atau struktur organisasi pada Word paling tepat menggunakan ...", ["Chart", "SmartArt", "WordArt", "Equation", "Screenshot"], 1], ["Wrap Text yang membuat teks mengelilingi objek berbentuk area persegi adalah ...", ["Behind Text", "Tight", "Square", "Top and Bottom", "Through"], 2], ["Wrap Text untuk menempatkan objek di belakang teks adalah ...", ["In Front of Text", "Behind Text", "Tight", "Square", "In Line With Text"], 1], ["Fitur untuk memotong bagian gambar yang tidak diinginkan adalah ...", ["Rotate", "Crop", "Picture Styles", "Border", "Wrap Text"], 1], ["Fitur untuk membuat surat dengan isi sama tetapi penerimanya berbeda-beda adalah ...", ["SmartArt", "Mail Merge", "Track Changes", "Page Number", "WordArt"], 1], ["Sumber data penerima Excel pada Mail Merge dipilih melalui ...", ["Mailings → Select Recipients → Use Existing List", "Insert → Excel Source", "Review → Data List", "Home → Recipient", "Layout → Merge Data"], 0], ["Sel aktif pada Excel digunakan untuk ...", ["Menampilkan hasil cetak", "Memasukkan atau mengedit data", "Mengubah sistem operasi", "Membuka internet", "Menghapus worksheet otomatis"], 1], ["Name Box Excel digunakan untuk ...", ["Menampilkan alamat sel aktif", "Menampilkan semua rumus", "Menentukan warna sel", "Menentukan font", "Mengatur printer"], 0], ["Jumlah maksimum kolom yang disebutkan modul Excel adalah ...", ["1.048.576", "65.536", "16.384", "8.192", "32.768"], 2], ["Jumlah maksimum baris yang disebutkan modul Excel adalah ...", ["16.384", "1.048.576", "65.535", "104.857", "4.096"], 1], ["Shortcut untuk menambah worksheet baru adalah ...", ["Ctrl + Shift + N", "Shift + F11", "Alt + F11", "Ctrl + F11", "Shift + F5"], 1], ["Data teks secara default ditampilkan ...", ["Rata kanan", "Rata tengah", "Rata kiri", "Rata bawah", "Rata atas"], 2], ["Data angka secara default ditampilkan ...", ["Rata kiri", "Rata kanan", "Rata tengah", "Justify", "Vertical center"], 1], ["Salah satu tombol untuk mengedit isi sel secara langsung adalah ...", ["F1", "F2", "F4", "F7", "F12"], 1], ["Mengurutkan nilai dari terkecil ke terbesar menggunakan ...", ["Filter descending", "Sort ascending", "Sort descending", "Filter ascending", "Merge ascending"], 1], ["Perbedaan utama Sort dan Filter adalah ...", ["Sort menghapus, Filter mengedit", "Sort mengurutkan, Filter menyaring berdasarkan kriteria", "Sort hanya teks, Filter hanya angka", "Sort membuat grafik, Filter PivotTable", "Sort untuk Word, Filter untuk Excel"], 1], ["Teks panjang agar turun ke beberapa baris dalam sel yang sama menggunakan ...", ["Merge Cell", "Wrap Text", "Orientation", "Border", "Sort"], 1], ["Untuk menggabungkan beberapa sel menjadi satu dan biasanya memusatkan isinya digunakan ...", ["Merge & Center", "Wrap & Center", "Split & Center", "Combine Cells", "Align & Merge"], 0], ["Formula Excel diawali dengan tanda ...", ["#", "@", "=", "%", "&"], 2], ["Operator pada formula =A1*B1 adalah ...", ["Plus", "Minus", "Asterisk", "Forward Slash", "Caret"], 2], ["Jika A1 = 8 dan B1 = 4, hasil =A1>B1 adalah ...", ["FALSE", "4", "12", "TRUE", "#VALUE!"], 3], ["Operator <> berarti ...", ["Lebih besar", "Lebih kecil", "Sama dengan", "Tidak sama dengan", "Lebih besar atau sama dengan"], 3], ["Fungsi untuk mengubah seluruh teks menjadi huruf kapital adalah ...", ["LOWER", "UPPER", "PROPER", "CAPITAL", "TEXTUP"], 1], ["Fungsi untuk mengubah seluruh teks menjadi huruf kecil adalah ...", ["LOWER", "UPPER", "PROPER", "SMALL", "DOWN"], 0], ["Fungsi PROPER digunakan untuk ...", ["Menghapus spasi", "Mengubah semua teks menjadi kecil", "Membuat huruf awal setiap kata menjadi kapital", "Mengambil karakter terakhir", "Menggabungkan sel"], 2], ["Fungsi MID digunakan untuk ...", ["Mengambil karakter dari posisi tertentu dengan jumlah tertentu", "Mengambil semua karakter dari kiri", "Mengambil semua karakter dari kanan", "Mengubah teks jadi kapital", "Menggabungkan teks"], 0], ["Formula untuk mencari nilai tertinggi dari A1:A5 adalah ...", ["=MIN(A1:A5)", "=SUM(A1:A5)", "=AVERAGE(A1:A5)", "=MAX(A1:A5)", "=COUNT(A1:A5)"], 3], ["Formula untuk mencari rata-rata A1:A4 adalah ...", ["=SUM(A1:A4)", "=MAX(A1:A4)", "=AVERAGE(A1:A4)", "=COUNT(A1:A4)", "=MEDIAN(A1:A4)"], 2], ["Referensi absolut yang mengunci kolom dan baris adalah ...", ["A$1", "$A1", "$A$1", "A1$", "$1A"], 2], ["Jika B2 = 74, hasil formula =IF(B2>=75;\"LULUS\";\"REMIDI\") adalah ...", ["LULUS", "REMIDI", "TRUE", "FALSE", "75"], 1], ["Tabel ingin diringkas dan dikelompokkan berdasarkan Jenis Layanan, Lama Langganan, dan Biaya tanpa banyak rumus manual. Fitur yang paling tepat adalah ...", ["Sort & Filter", "PivotTable", "Wrap Text", "SmartArt", "Goal Seek"], 1]];
+let quiz=[], idx=0, answers=[], finished=false;
+
+function shuffle(a){
+  a=[...a];
+  for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}
+  return a;
+}
+function start(){
+  // Acak urutan soal dan opsi jawaban setiap sesi.
+  quiz=shuffle(BANK).map(q=>{
+    const opts=q[1].map((text,i)=>({text,correct:i===q[2]}));
+    return {q:q[0],opts:shuffle(opts)};
+  });
+  idx=0; answers=Array(quiz.length).fill(null); finished=false;
+  document.getElementById('quiz').classList.remove('hidden');
+  document.getElementById('result').classList.add('hidden');
+  render();
+}
+function render(){
+  const item=quiz[idx];
+  document.getElementById('num').textContent=`Soal ${idx+1} dari ${quiz.length}`;
+  document.getElementById('question').textContent=item.q;
+  const box=document.getElementById('options'); box.innerHTML='';
+  item.opts.forEach((o,i)=>{
+    const b=document.createElement('button');
+    b.className='opt'+(answers[idx]===i?' selected':'');
+    b.innerHTML=`<b>${String.fromCharCode(65+i)}.</b> ${escapeHtml(o.text)}`;
+    b.onclick=()=>{answers[idx]=i; render();};
+    box.appendChild(b);
+  });
+  document.getElementById('prev').disabled=idx===0;
+  document.getElementById('prev').style.opacity=idx===0?.45:1;
+  document.getElementById('next').textContent=idx===quiz.length-1?'Selesai ✓':'Berikutnya →';
+  document.getElementById('bar').style.width=((idx+1)/quiz.length*100)+'%';
+  document.getElementById('scoreLive').textContent=`Terjawab: ${answers.filter(x=>x!==null).length}`;
+}
+function escapeHtml(s){
+  return s.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');
+}
+document.getElementById('prev').onclick=()=>{if(idx>0){idx--;render()}};
+document.getElementById('next').onclick=()=>{
+  if(answers[idx]===null){
+    alert('Pilih salah satu jawaban dulu 😭');
+    return;
+  }
+  if(idx<quiz.length-1){idx++;render()} else showResult();
+};
+document.getElementById('restart').onclick=()=>{
+  if(confirm('Acak ulang? Progres yang sekarang akan hilang.')) start();
+};
+function showResult(){
+  let correct=0;
+  const details=[];
+  quiz.forEach((item,i)=>{
+    const chosen=answers[i], right=item.opts.findIndex(x=>x.correct);
+    if(chosen===right) correct++;
+    details.push({i, chosen, right});
+  });
+  const pct=Math.round(correct/quiz.length*100);
+  document.getElementById('quiz').classList.add('hidden');
+  const res=document.getElementById('result');res.classList.remove('hidden');
+  let html=`<h2>🎯 Hasil Latihan</h2><div class="score">${correct}/100</div>
+  <div class="sub">${pct}% benar • ${100-correct} salah</div>
+  <div style="margin:20px 0"><button class="primary" onclick="start()">🔀 Coba Lagi (acak ulang)</button></div>
+  <div class="review"><h3>Review Jawaban</h3>`;
+  details.forEach(d=>{
+    const item=quiz[d.i], ok=d.chosen===d.right;
+    const chosen=d.chosen===null?'Belum dijawab':String.fromCharCode(65+d.chosen)+'. '+item.opts[d.chosen].text;
+    const right=String.fromCharCode(65+d.right)+'. '+item.opts[d.right].text;
+    html+=`<div class="rev ${ok?'ok':'bad'}"><b>${d.i+1}. ${escapeHtml(item.q)}</b>
+    <div class="small" style="margin-top:7px">Jawabanmu: ${escapeHtml(chosen)}</div>
+    <div class="small">Kunci: ${escapeHtml(right)}</div></div>`;
+  });
+  html+='</div>';res.innerHTML=html;
+}
+start();
+</script>
+</body>
+</html>
